@@ -1,26 +1,268 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
+
+/* ─────────────────────────────────────────────────
+   Otaku Intelligence — Hi-Fi Design Tokens
+   Navy dark base + Sakura rose accent
+   Semantic surface tokens enable light/dark swap.
+   Fonts: Inter · Noto Sans JP · JetBrains Mono
+   ───────────────────────────────────────────────── */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--font-sans: var(--font-sans);
+	--font-mono: var(--font-mono);
+	--font-heading: var(--font-sans);
+
+	/* shadcn semantic passthrough */
+	--color-sidebar-ring: var(--sidebar-ring);
+	--color-sidebar-border: var(--sidebar-border);
+	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+	--color-sidebar-accent: var(--sidebar-accent);
+	--color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+	--color-sidebar-primary: var(--sidebar-primary);
+	--color-sidebar-foreground: var(--sidebar-foreground);
+	--color-sidebar: var(--sidebar);
+	--color-chart-5: var(--chart-5);
+	--color-chart-4: var(--chart-4);
+	--color-chart-3: var(--chart-3);
+	--color-chart-2: var(--chart-2);
+	--color-chart-1: var(--chart-1);
+	--color-ring: var(--ring);
+	--color-input: var(--input);
+	--color-border: var(--border);
+	--color-destructive: var(--destructive);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-accent: var(--accent);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-muted: var(--muted);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-secondary: var(--secondary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-primary: var(--primary);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-popover: var(--popover);
+	--color-card-foreground: var(--card-foreground);
+	--color-card: var(--card);
+
+	/* Extended brand tokens */
+	--color-brand: var(--brand);
+	--color-brand-2: var(--brand-2);
+	--color-sakura: var(--sakura);
+	--color-sakura-soft: var(--sakura-soft);
+	--color-plum: var(--plum);
+	--color-teal: var(--teal);
+	--color-amber: var(--amber);
+	--color-ok: var(--ok);
+	--color-warn: var(--warn);
+	--color-danger: var(--danger);
+	--color-surface: var(--surface);
+	--color-surface-2: var(--surface-2);
+	--color-fg: var(--fg);
+	--color-fg-dim: var(--fg-dim);
+	--color-fg-mute: var(--fg-mute);
+	--color-border-strong: var(--border-strong);
+	--color-bg-1: var(--bg-1);
+	--color-bg-2: var(--bg-2);
+
+	/* Radius scale — per design */
+	--radius-xs: 6px;
+	--radius-sm: 8px;
+	--radius-md: 12px;
+	--radius-lg: 16px;
+	--radius-xl: 22px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─────────────────────────────────────────────────
+   DARK (default) — navy palette
+   ───────────────────────────────────────────────── */
+:root {
+	/* Core surfaces */
+	--bg: #070912;
+	--bg-1: #0c1020;
+	--bg-2: #131830;
+	--surface: #171c38;
+	--surface-2: #1d2344;
+	--border: #252b54;
+	--border-strong: #323a6b;
+
+	/* Typography */
+	--fg: #e7ebff;
+	--fg-dim: #a7aed6;
+	--fg-mute: #6f77a6;
+
+	/* Brand blue */
+	--brand: #5b8bff;
+	--brand-2: #3b67e6;
+
+	/* Sakura rose */
+	--sakura: #f43f79;
+	--sakura-soft: #f9a8c4;
+
+	/* Supporting */
+	--plum: #a78bfa;
+	--teal: #34d3b7;
+	--amber: #f5b454;
+	--red: #ef5b72;
+	--ok: #44d39d;
+	--warn: #f5b454;
+	--danger: #ef5b72;
+
+	/* Semantic surface tints — swap per theme */
+	--tint-sidebar: linear-gradient(180deg, rgba(23, 28, 56, 0.9), rgba(12, 16, 32, 0.9));
+	--tint-card: linear-gradient(180deg, rgba(23, 28, 56, 0.7), rgba(18, 22, 44, 0.7));
+	--tint-topbar: rgba(7, 9, 18, 0.5);
+	--tint-hover: rgba(255, 255, 255, 0.06);
+	--tint-chip: rgba(255, 255, 255, 0.05);
+	--tint-input: rgba(255, 255, 255, 0.04);
+	--tint-active: linear-gradient(180deg, rgba(91, 139, 255, 0.15), rgba(91, 139, 255, 0.05));
+	--scrollbar: rgba(255, 255, 255, 0.06);
+	--scrollbar-hover: rgba(255, 255, 255, 0.12);
+	--trace-bg: rgba(0, 0, 0, 0.25);
+	--user-bubble: linear-gradient(180deg, rgba(91, 139, 255, 0.22), rgba(91, 139, 255, 0.1));
+	--backdrop: rgba(7, 9, 18, 0.55);
+
+	/* Shadows */
+	--shadow-1: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 1px 2px rgba(0, 0, 0, 0.35);
+	--shadow-2: 0 1px 0 rgba(255, 255, 255, 0.05) inset, 0 8px 24px rgba(0, 0, 0, 0.35);
+	--shadow-3: 0 20px 60px rgba(0, 0, 0, 0.55);
+
+	/* shadcn bridges → dark defaults */
+	--background: var(--bg);
+	--foreground: var(--fg);
+	--card: var(--bg-1);
+	--card-foreground: var(--fg);
+	--popover: var(--surface);
+	--popover-foreground: var(--fg);
+	--primary: var(--brand);
+	--primary-foreground: #070912;
+	--secondary: var(--surface-2);
+	--secondary-foreground: var(--fg);
+	--muted: var(--bg-2);
+	--muted-foreground: var(--fg-mute);
+	--accent: var(--sakura);
+	--accent-foreground: var(--fg);
+	--destructive: var(--danger);
+	--input: var(--border);
+	--ring: var(--brand);
+
+	/* Chart */
+	--chart-1: #5b8bff;
+	--chart-2: #f43f79;
+	--chart-3: #34d3b7;
+	--chart-4: #a78bfa;
+	--chart-5: #f5b454;
+
+	/* Base radius for shadcn components */
+	--radius: 12px;
+
+	/* Sidebar shadcn bridges */
+	--sidebar: var(--bg-1);
+	--sidebar-foreground: var(--fg-dim);
+	--sidebar-primary: var(--brand);
+	--sidebar-primary-foreground: var(--fg);
+	--sidebar-accent: var(--surface);
+	--sidebar-accent-foreground: var(--fg);
+	--sidebar-border: var(--border);
+	--sidebar-ring: var(--brand);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─────────────────────────────────────────────────
+   LIGHT — neutrals with same brand accents
+   Applied when html[data-theme="light"]
+   ───────────────────────────────────────────────── */
+:root[data-theme="light"] {
+	--bg: #f6f7fb;
+	--bg-1: #ffffff;
+	--bg-2: #eef1f8;
+	--surface: #ffffff;
+	--surface-2: #f6f7fb;
+	--border: #e3e6f0;
+	--border-strong: #ccd1e0;
+
+	--fg: #141839;
+	--fg-dim: #454c70;
+	--fg-mute: #868ca8;
+
+	--tint-sidebar: linear-gradient(180deg, #fafbff, #f2f4fb);
+	--tint-card: linear-gradient(180deg, #ffffff, #fafbff);
+	--tint-topbar: rgba(255, 255, 255, 0.7);
+	--tint-hover: rgba(20, 24, 57, 0.04);
+	--tint-chip: rgba(20, 24, 57, 0.04);
+	--tint-input: rgba(20, 24, 57, 0.03);
+	--tint-active: linear-gradient(180deg, rgba(91, 139, 255, 0.14), rgba(91, 139, 255, 0.04));
+	--scrollbar: rgba(20, 24, 57, 0.12);
+	--scrollbar-hover: rgba(20, 24, 57, 0.24);
+	--trace-bg: rgba(20, 24, 57, 0.04);
+	--user-bubble: linear-gradient(180deg, rgba(91, 139, 255, 0.18), rgba(91, 139, 255, 0.08));
+	--backdrop: rgba(20, 24, 57, 0.3);
+
+	--shadow-1: 0 1px 2px rgba(20, 24, 57, 0.05);
+	--shadow-2: 0 1px 2px rgba(20, 24, 57, 0.04), 0 8px 24px rgba(20, 24, 57, 0.06);
+	--shadow-3: 0 20px 60px rgba(20, 24, 57, 0.15);
+
+	/* shadcn re-bridges for light */
+	--background: var(--bg);
+	--foreground: var(--fg);
+	--card: var(--bg-1);
+	--card-foreground: var(--fg);
+	--popover: var(--bg-1);
+	--popover-foreground: var(--fg);
+	--secondary: var(--bg-2);
+	--secondary-foreground: var(--fg);
+	--muted: var(--bg-2);
+	--muted-foreground: var(--fg-mute);
+	--accent: var(--sakura);
+	--accent-foreground: #ffffff;
+	--input: var(--border);
+	--primary-foreground: #ffffff;
+
+	--sidebar: var(--bg-1);
+	--sidebar-foreground: var(--fg-dim);
+	--sidebar-accent: var(--bg-2);
+	--sidebar-accent-foreground: var(--fg);
+	--sidebar-border: var(--border);
+}
+
+@layer base {
+	* {
+		@apply border-border outline-ring/50;
+	}
+	body {
+		margin: 0;
+		background:
+			radial-gradient(1200px 700px at 85% -10%, rgba(244, 63, 121, 0.12), transparent 60%),
+			radial-gradient(900px 600px at -10% 110%, rgba(91, 139, 255, 0.16), transparent 60%),
+			var(--bg);
+		color: var(--fg);
+		transition:
+			background-color 0.2s ease,
+			color 0.2s ease;
+		-webkit-font-smoothing: antialiased;
+		font-feature-settings: "ss01", "cv11";
+		overflow: hidden;
+	}
+	html {
+		@apply font-sans scroll-smooth;
+		height: 100%;
+	}
+
+	::-webkit-scrollbar {
+		width: 10px;
+		height: 10px;
+	}
+	::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	::-webkit-scrollbar-thumb {
+		background: var(--scrollbar);
+		border-radius: 10px;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: var(--scrollbar-hover);
+	}
 }
