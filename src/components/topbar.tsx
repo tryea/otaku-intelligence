@@ -53,7 +53,7 @@ export function Topbar({
 			<button
 				type="button"
 				onClick={() => setOpen(true)}
-				className="ml-auto flex items-center gap-2 rounded-[10px] border border-border px-3 py-1.5 transition-colors hover:border-[color:var(--border-strong)]"
+				className="ml-auto flex cursor-pointer items-center gap-2 rounded-[10px] border border-border px-3 py-1.5 transition-colors hover:border-[color:var(--border-strong)]"
 				style={{
 					background: "var(--tint-input)",
 					width: 320,
@@ -101,7 +101,7 @@ export function Topbar({
 			<button
 				type="button"
 				aria-label="Notifications"
-				className="grid h-[34px] w-[34px] place-items-center rounded-[9px] border border-border text-fg-dim transition-colors hover:text-foreground"
+				className="grid h-[34px] w-[34px] cursor-pointer place-items-center rounded-[9px] border border-border text-fg-dim transition-colors hover:text-foreground"
 				style={{ background: "var(--tint-input)" }}
 				onMouseEnter={(e) => {
 					e.currentTarget.style.background = "var(--tint-hover)";
@@ -119,7 +119,7 @@ export function Topbar({
 				aria-label={`Switch to ${nextLabel} mode`}
 				title={`Switch to ${nextLabel} mode`}
 				onClick={() => setTheme(isDark ? "light" : "dark")}
-				className="grid h-[34px] w-[34px] place-items-center rounded-[9px] border border-border text-fg-dim transition-colors hover:text-foreground"
+				className="grid h-[34px] w-[34px] cursor-pointer place-items-center rounded-[9px] border border-border text-fg-dim transition-colors hover:text-foreground"
 				style={{ background: "var(--tint-input)" }}
 				onMouseEnter={(e) => {
 					e.currentTarget.style.background = "var(--tint-hover)";
